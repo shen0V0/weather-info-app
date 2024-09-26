@@ -1,6 +1,6 @@
-import 'dart:math';
 import 'package:flutter/material.dart';
-//final
+import 'dart:math'; // To generate random numbers
+
 void main() {
   runApp(MyApp());
 }
@@ -9,48 +9,62 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Weather info app',
-      theme: ThemeData(
-        
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-        useMaterial3: true,
-      ),
-      home: MyHomePage(),
+      title: 'Weather App',
+      home: Weather(),
     );
   }
 }
 
-class MyHomePage extends StatefulWidget {
-  
+class Weather extends StatefulWidget {
   @override
-  State<MyHomePage> createState() => _MyHomePageState();
+  _WeatherState createState() => _WeatherState();
 }
 
-class _MyHomePageState extends State<MyHomePage> {
+class _WeatherState extends State<Weather> {
   final TextEditingController _cityController = TextEditingController();
 
   String cityName = 'City Name';
   String temperature = 'Temperature';
   String weatherCondition = 'Weather Condition';
-void fetchWeather() {
+  List<Map<String, String>> forecast = [];
+
+  // Function to simulate fetching weather data
+  void fetchWeather() {
     setState(() {
       cityName = _cityController.text;
 
+      // Generate a random temperature between 15°C and 30°C
       int temp = Random().nextInt(16) + 15;
       temperature = '$temp°C';
 
+      // Randomly select a weather condition
       List<String> conditions = ['Sunny', 'Cloudy', 'Rainy'];
       weatherCondition = conditions[Random().nextInt(conditions.length)];
     });
   }
- 
+
+  void fetchForecast() {
+    setState(() {
+      forecast.clear(); 
+      List<String> conditions = ['Sunny', 'Cloudy', 'Rainy'];
+
+      for (int i = 0; i < 7; i++) {
+        int temp = Random().nextInt(16) + 15;
+        String condition = conditions[Random().nextInt(conditions.length)];
+        forecast.add({
+          'day': 'Day ${i + 1}',
+          'temperature': '$temp°C',
+          'condition': condition,
+        });
+      }
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-        title: Text('Weather app'),
+        title: Text('Enter City Name'),
       ),
       body: Center(
         child: ConstrainedBox(
@@ -70,8 +84,13 @@ void fetchWeather() {
                 ),
                 SizedBox(height: 20),
                 ElevatedButton(
-                  onPressed: fetchWeather, 
+                  onPressed: fetchWeather, // Call fetchWeather when button is pressed
                   child: Text('Fetch Weather'),
+                ),
+                SizedBox(height: 10),
+                ElevatedButton(
+                  onPressed: fetchForecast, // Call fetchForecast when button is pressed
+                  child: Text('Fetch 7-Day Forecast'),
                 ),
                 SizedBox(height: 40),
                 // Placeholder weather data
@@ -92,6 +111,23 @@ void fetchWeather() {
                   style: TextStyle(fontSize: 18),
                   textAlign: TextAlign.center,
                 ),
+                SizedBox(height: 40),
+                // Display 7-day forecast
+                if (forecast.isNotEmpty) ...[
+                  Text(
+                    '7-Day Forecast',
+                    style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                  ),
+                  SizedBox(height: 10),
+                  for (var day in forecast)
+                    Padding(
+                      padding: const EdgeInsets.symmetric(vertical: 5.0),
+                      child: Text(
+                        '${day['day']}: ${day['temperature']}, ${day['condition']}',
+                        style: TextStyle(fontSize: 16),
+                      ),
+                    ),
+                ],
               ],
             ),
           ),
