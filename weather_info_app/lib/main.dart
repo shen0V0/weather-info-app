@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'dart:math'; // To generate random numbers
-
+import 'dart:math'; 
 void main() {
   runApp(MyApp());
 }
