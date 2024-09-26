@@ -77,19 +77,19 @@ void fetchWeather() {
                 SizedBox(height: 40),
                 // Placeholder weather data
                 Text(
-                  'City: CityName',
+                  'City: $cityName',
                   style: TextStyle(fontSize: 18),
                   textAlign: TextAlign.center,
                 ),
                 SizedBox(height: 10),
                 Text(
-                  'Temperature: Temperature',
+                  'Temperature: $temperature',
                   style: TextStyle(fontSize: 18),
                   textAlign: TextAlign.center,
                 ),
                 SizedBox(height: 10),
                 Text(
-                  'Condition: WeatherCondition',
+                  'Condition: $weatherCondition',
                   style: TextStyle(fontSize: 18),
                   textAlign: TextAlign.center,
                 ),
