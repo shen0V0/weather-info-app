@@ -26,7 +26,11 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
+  final TextEditingController _cityController = TextEditingController();
 
+  String cityName = 'City Name';
+  String temperature = 'Temperature';
+  String weatherCondition = 'Weather Condition';
 
  
 
@@ -35,7 +39,7 @@ class _MyHomePageState extends State<MyHomePage> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-        title: Text(''),
+        title: Text('Weather app'),
       ),
       body: Center(
         child: ConstrainedBox(
@@ -46,7 +50,37 @@ class _MyHomePageState extends State<MyHomePage> {
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                
+                TextField(
+                  controller: _cityController,
+                  decoration: InputDecoration(
+                    labelText: 'City Name',
+                    border: OutlineInputBorder(),
+                  ),
+                ),
+                SizedBox(height: 20),
+                ElevatedButton(
+                  onPressed: (){}, 
+                  child: Text('Fetch Weather'),
+                ),
+                SizedBox(height: 40),
+                // Placeholder weather data
+                Text(
+                  'City: $cityName',
+                  style: TextStyle(fontSize: 18),
+                  textAlign: TextAlign.center,
+                ),
+                SizedBox(height: 10),
+                Text(
+                  'Temperature: $temperature',
+                  style: TextStyle(fontSize: 18),
+                  textAlign: TextAlign.center,
+                ),
+                SizedBox(height: 10),
+                Text(
+                  'Condition: $weatherCondition',
+                  style: TextStyle(fontSize: 18),
+                  textAlign: TextAlign.center,
+                ),
               ],
             ),
           ),
