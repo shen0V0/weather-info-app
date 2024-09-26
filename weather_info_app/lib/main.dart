@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 
 void main() {
@@ -31,7 +33,17 @@ class _MyHomePageState extends State<MyHomePage> {
   String cityName = 'City Name';
   String temperature = 'Temperature';
   String weatherCondition = 'Weather Condition';
+void fetchWeather() {
+    setState(() {
+      cityName = _cityController.text;
 
+      int temp = Random().nextInt(16) + 15;
+      temperature = '$temp°C';
+
+      List<String> conditions = ['Sunny', 'Cloudy', 'Rainy'];
+      weatherCondition = conditions[Random().nextInt(conditions.length)];
+    });
+  }
  
 
   @override
@@ -65,19 +77,19 @@ class _MyHomePageState extends State<MyHomePage> {
                 SizedBox(height: 40),
                 // Placeholder weather data
                 Text(
-                  'City: $cityName',
+                  'City: CityName',
                   style: TextStyle(fontSize: 18),
                   textAlign: TextAlign.center,
                 ),
                 SizedBox(height: 10),
                 Text(
-                  'Temperature: $temperature',
+                  'Temperature: Temperature',
                   style: TextStyle(fontSize: 18),
                   textAlign: TextAlign.center,
                 ),
                 SizedBox(height: 10),
                 Text(
-                  'Condition: $weatherCondition',
+                  'Condition: WeatherCondition',
                   style: TextStyle(fontSize: 18),
                   textAlign: TextAlign.center,
                 ),
