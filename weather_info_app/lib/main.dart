@@ -1,5 +1,4 @@
 import 'dart:math';
-
 import 'package:flutter/material.dart';
 
 void main() {
@@ -71,7 +70,7 @@ void fetchWeather() {
                 ),
                 SizedBox(height: 20),
                 ElevatedButton(
-                  onPressed: (){}, 
+                  onPressed: fetchWeather, 
                   child: Text('Fetch Weather'),
                 ),
                 SizedBox(height: 40),
